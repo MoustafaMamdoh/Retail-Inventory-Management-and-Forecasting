@@ -1,7 +1,6 @@
 # SQL Documentation
-----
-Standard Reports and Analytical Queries to derive valuable insights for the Retail Inventory Management and Forecasting system.
-#
+
+
 
 <h3> Quick Peak on Database </h3>
 
@@ -41,7 +40,7 @@ SELECT TOP 3 * FROM OrderLine
 #
 
 <h3>  SQL Queries </h3>
-<h6>Some Essential Reports to monitor the overall health of sales, inventory, orders, and supplier relationships.
+<h6>Some Standard Essential Reports to monitor the overall health of sales, inventory, orders, and supplier relationships.
 <br>These queries can be Executed Regularly to generate up-to-date reports for Management Review.
 </h6>
 
