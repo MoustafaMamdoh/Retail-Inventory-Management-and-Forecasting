@@ -33,7 +33,7 @@ SELECT TOP 3 * FROM Orders
 ``` sql
 SELECT TOP 3 * FROM OrderLine
 ```
-![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/orderLine.png)
+![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/orderline.png)
 
 
 
