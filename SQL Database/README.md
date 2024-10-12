@@ -1,7 +1,6 @@
 # SQL Documentation
-----
-Standard Reports and Analytical Queries to derive valuable insights for the Retail Inventory Management and Forecasting system.
-#
+
+
 
 <h3> Quick Peak on Database </h3>
 
@@ -9,31 +8,31 @@ Standard Reports and Analytical Queries to derive valuable insights for the Reta
 ``` sql
 SELECT TOP 3 * FROM Inventory
 ```
-![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/image.jpg?raw=true)
+![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/inventory.png)
 ``` sql
 SELECT TOP 3 * FROM Customers
 ```
-![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/image.jpg?raw=true)
+![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/customers.png)
 ``` sql
 SELECT TOP 3 * FROM Suppliers
 ```
-![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/image.jpg?raw=true)
+![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/suppliers.png)
 ``` sql
 SELECT TOP 3 * FROM Products
 ```
-![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/image.jpg?raw=true)
+![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/product.png)
 ``` sql
 SELECT TOP 3 * FROM Sales
 ```
-![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/image.jpg?raw=true)
+![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/sales.png)
 ``` sql
 SELECT TOP 3 * FROM Orders
 ```
-![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/image.jpg?raw=true)
+![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/order.png)
 ``` sql
 SELECT TOP 3 * FROM OrderLine
 ```
-![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/image.jpg?raw=true)
+![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/orderline.png)
 
 
 
@@ -41,7 +40,7 @@ SELECT TOP 3 * FROM OrderLine
 #
 
 <h3>  SQL Queries </h3>
-<h6>Some Essential Reports to monitor the overall health of sales, inventory, orders, and supplier relationships.
+<h6>Some Standard Essential Reports to monitor the overall health of sales, inventory, orders, and supplier relationships.
 <br>These queries can be Executed Regularly to generate up-to-date reports for Management Review.
 </h6>
 
