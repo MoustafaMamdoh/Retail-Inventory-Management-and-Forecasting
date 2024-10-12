@@ -17,23 +17,23 @@ SELECT TOP 3 * FROM Customers
 ``` sql
 SELECT TOP 3 * FROM Suppliers
 ```
-![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/image.jpg?raw=true)
+![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/suppliers.png)
 ``` sql
 SELECT TOP 3 * FROM Products
 ```
-![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/image.jpg?raw=true)
+![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/product.png)
 ``` sql
 SELECT TOP 3 * FROM Sales
 ```
-![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/image.jpg?raw=true)
+![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/sales.png)
 ``` sql
 SELECT TOP 3 * FROM Orders
 ```
-![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/image.jpg?raw=true)
+![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/order.png)
 ``` sql
 SELECT TOP 3 * FROM OrderLine
 ```
-![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/image.jpg?raw=true)
+![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/orderLine.png)
 
 
 
