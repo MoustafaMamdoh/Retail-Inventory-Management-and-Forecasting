@@ -9,11 +9,11 @@ Standard Reports and Analytical Queries to derive valuable insights for the Reta
 ``` sql
 SELECT TOP 3 * FROM Inventory
 ```
-![alt text](images/inventory.png)
+![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/inventory.png)
 ``` sql
 SELECT TOP 3 * FROM Customers
 ```
-![alt text](images/customers.png)
+![alt text](https://github.com/shahdHesham13/Retail-Inventory-Management-and-Forecasting/blob/main/images/customers.png)
 ``` sql
 SELECT TOP 3 * FROM Suppliers
 ```
