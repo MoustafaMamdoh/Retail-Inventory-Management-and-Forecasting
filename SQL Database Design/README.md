@@ -1,8 +1,15 @@
-# SQL Documentation
+# SQL Database Design and Implementation Documentation
 
 
 
-<h3> Quick Peak on Database </h3>
+<h3> 🧵 Contains Main Three Points: </h3>
+<b>
+I- Quick Peak on Database<br>
+II- SQL Queries for Bussiness Information Questions<br>
+III- Filling Database with dump data
+</b>
+
+<h2> I- Quick Peak on Database </h2>
 
 
 ``` sql
@@ -39,10 +46,10 @@ SELECT TOP 3 * FROM OrderLine
 
 #
 
-<h3>  SQL Queries </h3>
-<h6>Some Standard Essential Reports to monitor the overall health of sales, inventory, orders, and supplier relationships.
-<br>These queries can be Executed Regularly to generate up-to-date reports for Management Review.
-</h6>
+<h2> II- SQL Queries for Bussiness Information Questions </h2>
+<h5>Some Standard Essential Reports to monitor the overall health of sales, inventory, orders, and supplier relationships.
+<br> These queries can be Executed Regularly to generate up-to-date reports for Management Review.
+</h5>
 
 1. This query calculates Monthly Total Sales for each year to help track sales Trends over time.
 
@@ -267,3 +274,126 @@ JOIN Customers c ON o.CustomerID = c.CustomerID
 GROUP BY c.CustomerName
 HAVING DATEDIFF(DAY, MAX(o.OrderDate), GETDATE()) > 30;
 ```
+
+<h2> III- Filling Database with dump data </h2>
+
+### Data Population Script for Database
+
+The script in ```invData.py``` file generates dummy data to populate three tables: **Suppliers**, **Customers**, and **Products** in the **InventoryManagement** database.
+<br>
+by using Python Library `Faker`For generating the fake data,
+<br>
+and `pyodbc` For connecting to the SQL Server database.
+
+
+### Code Breakdown
+
+1. **Import Libraries**:
+   ```python
+   import random
+   from faker import Faker
+   import pyodbc
+   ```
+
+2. **Initialize Faker**:
+   ```python
+   faker = Faker()
+   ```
+
+3. **Database Connection**:
+   Set up the connection to the SQL Server database.
+   ```python
+   conn = pyodbc.connect(
+       'DRIVER={SQL Server};'
+       'SERVER=DESKTOP-MCCKTCD;'
+       'DATABASE=InventoryManagment;'
+   )
+   cursor = conn.cursor()
+   ```
+
+4. **Configuration**:
+   Define the number of records you want to generate for each table.
+   ```python
+   num_suppliers = 10
+   num_products = 50
+   num_customers = 20
+   ```
+
+5. **Functions to Populate each Table**:
+
+   - **Populate Suppliers Table**:
+     ```python
+     def populate_suppliers():
+         suppliers_data = []
+         for _ in range(num_suppliers):
+             suppliers_data.append((
+                 faker.company(),
+                 faker.email(),
+                 faker.phone_number()[:15],
+                 faker.address(),
+             ))
+         
+         cursor.executemany("""
+             INSERT INTO Suppliers (SupplierName, ContactEmail, ContactPhone, Address) 
+             VALUES (?, ?, ?, ?)
+         """, suppliers_data)
+         conn.commit()
+         print("Suppliers data inserted successfully.")
+     ```
+
+   - **Populate Customers Table**:
+     ```python
+     def populate_customers():
+         customers_data = []
+         for _ in range(num_customers):
+             customers_data.append((
+                 faker.name(),
+                 faker.email(),
+                 faker.phone_number()[:15],
+                 faker.address(),
+             ))
+         
+         cursor.executemany("""
+             INSERT INTO Customers (CustomerName, ContactEmail, ContactPhone, Address) 
+             VALUES (?, ?, ?, ?)
+         """, customers_data)
+         conn.commit()
+         print("Customers data inserted successfully.")
+     ```
+
+   - **Populate Products Table**:
+     ```python
+     def populate_products():
+         cursor.execute("SELECT SupplierID FROM Suppliers")
+         existing_supplier_ids = [row[0] for row in cursor.fetchall()]
+         
+         products_data = []
+         for _ in range(num_products):
+             products_data.append((
+                 faker.word(),
+                 random.choice(existing_supplier_ids),
+                 faker.word(),
+                 round(random.uniform(5, 100), 2)
+             ))
+         
+         cursor.executemany("""
+             INSERT INTO Products (ProductName, SupplierID, Category, Price) 
+             VALUES (?, ?, ?, ?)
+         """, products_data)
+         conn.commit()
+         print("Products data inserted successfully.")
+     ```
+
+6. **Execute the functions to populate the tables.**:
+   ```python
+   populate_suppliers()
+   populate_customers()
+   populate_products()
+   ```
+
+7. **Close Connection**:
+   Ensure to close the cursor and connection after data insertion.
+   ```python
+   cursor.close()
+   conn.close()
+   ```
