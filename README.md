@@ -6,28 +6,31 @@ This project aims to provide a comprehensive solution for managing retail invent
 # Project Breakdown:
 
 
--  <b>Week 1: SQL Database Design and Implementation</b>
-   * Tasks: Design a SQL database with main user requirments in Entities and define the relationships between them. Then Populate with sample data and write reporting queries for tracking inventory and sales.
-    * Deliverables: Database schema, ERD, populated tables, sample reporting queries.
+-  <b>1-  SQL Database Design and Implementation</b>
+     1.	Database Design
+     2.	Filling Database with dump data
+     3.	SQL Queries for Reporting
 
 
 
-- <b> Week 2: Data Warehousing and Python Integration </b>
-    - Tasks: Build a data warehouse and use ETL processes for data integration. Develop Python scripts for data extraction and cleaning.
-   - Deliverables: Data warehouse and Python scripts.
+- <b>2- Data Warehousing and Python Integration </b>
+     1.	Data Warehouse
+     2.	ETL
+     3.	Data Preprocessing
+    
 
 
-- <b>Week 3: Forecasting and Analysis with Azure Integration</b>
-  
-   - Tasks: Build forecasting models using Python and integrate with Azure services for analysis and storage.
-   - Deliverables: Forecasting model and Azure setup.
+- <b> 3- Forecasting and Analysis with Azure Integration</b>
+     1.	Build Forecasting Model
+     2.	Data Storage and Analysis using Azure Services
+     3.	Model Performance Evaluation
 
-- <b>
-  Week 4: MLOps and Deployment
-</b>
 
-  - Tasks: Track models with MLflow, deploy the forecasting model as a web service or integrate it into a dashboard.
-  - Deliverables: Deployed model, final report and presentation.
+- <b>4-  MLOps and Deployment</b>
+     1.	Using MLflow to manage and track model.
+     2.	Filling Database with dump data
+     3.	Deploy the forecasting model and integrate it 
+into a dashboard
 
 
 
