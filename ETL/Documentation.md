@@ -18,6 +18,7 @@ The `Customer_Data_Pipeline` handles customer data and consists of two main proc
 
 - **Step 2: Transformation and Loading**  
   The transformation process trims leading and trailing spaces from `CustomerName` using the `trim(CustomerName)` function. The cleaned data is then loaded into the `DimCustomer` table in `InventoryDataWarehouse` for further analysis.
+![image](https://github.com/user-attachments/assets/b0c3a064-b0ec-42ed-948c-cfde2e452912)
 
 ---
 
