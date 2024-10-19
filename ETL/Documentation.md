@@ -28,6 +28,7 @@ The `Product_Data_Pipeline` is responsible for product data extraction:
 
 - **Step 1: Extraction**  
   Extracts data from the `Products` table in `InventoryDB` and loads it into the `DimProducts` table in `InventoryDataWarehouse`. This pipeline focuses solely on data extraction and does not include complex transformations.
+![image](https://github.com/user-attachments/assets/0adfc5bc-dc24-4247-8ea8-e201ff5c59a6)
 
 ---
 
@@ -37,12 +38,14 @@ The `Supplier_Data_Pipeline` follows the same structure as the product data pipe
 
 - **Step 1: Extraction**  
   Extracts supplier data from the `Suppliers` table in `InventoryDB` and loads it into the `DimSuppliers` table in `InventoryDataWarehouse`. Like the product data pipeline, this process focuses on extraction without transformations.
+![image](https://github.com/user-attachments/assets/57c8601e-7e6a-48ef-bb59-475c30b5fbb3)
 
 ---
 
 ### 4. **Fact Sales Data Pipeline**
 
 The `FactSales_Data_Pipeline` is the most complex and involves multiple steps to join data and build the `FactSales` table in `InventoryDataWarehouse`. The pipeline consists of the following steps:
+![image](https://github.com/user-attachments/assets/53ea1bba-6a49-4ae7-a7cc-201e1d8798bf)
 
 - **Step 1: Extract Orders**  
   Extracts order data from the `Orders` table and loads it into the `StagingOrders` table.
@@ -63,7 +66,8 @@ The `FactSales_Data_Pipeline` is the most complex and involves multiple steps to
     - `QuantitySold` from the `Quantity` field in `StagingOrderLine`.
     - `SaleAmount` as `QuantitySold * Price` from the `Products` table.
   - The final join is with `DimDate` based on `SaleDate`.
-  
+  ![image](https://github.com/user-attachments/assets/63f0597d-d065-4e57-a8b8-6c3db6b0029d)
+
   The constructed data is mapped to the `FactSales` table in `InventoryDataWarehouse` for reporting.
 
 ---
