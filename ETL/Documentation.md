@@ -4,7 +4,8 @@ This repository contains the ETL process for loading data from an operational da
 
 ## Overview
 
-The ETL process consists of **four main pipelines**, each responsible for different aspects of data movement and transformation from `InventoryDB` to `InventoryDataWarehouse`.
+The ETL process consists of **four main pipelines**, each responsible for different aspects of data movement and transformation from `InventoryDB` to `InventoryDataWarehouse`.![image](https://github.com/user-attachments/assets/c80b023c-c0ce-4405-9712-87d057f633e1)
+
 
 ---
 
