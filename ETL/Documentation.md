@@ -1,60 +1,101 @@
-ETL Process Overview
-The ETL (Extract, Transform, Load) process for the InventoryDB and InventoryDataWarehouse is composed of four main pipelines that manage data extraction, transformation, and loading operations. These pipelines are essential in moving data from the operational database (InventoryDB) to the data warehouse (InventoryDataWarehouse) for reporting and analysis purposes.
+# Inventory Data Warehouse ETL Process
 
-1. Customer Data Pipeline
-The Customer_Data_Pipeline is responsible for handling the customer data transfer, consisting of two main processes:
+This repository contains the ETL process for loading data from an operational database (`InventoryDB`) into a data warehouse (`InventoryDataWarehouse`) for reporting and analysis. The process is implemented using multiple Azure Data Factory pipelines that handle the extraction, transformation, and loading (ETL) of the data.
 
-Step 1: Extraction
-Extracts customer data from the Customers table in the operational database (InventoryDB) and stores it temporarily in the StagingCustomers table. The extraction only includes records from the last 24 hours to avoid redundant data transfers.
+## Overview
 
-Step 2: Transformation and Loading
-The transformation process involves cleaning up the CustomerName by removing any leading or trailing spaces using the trim(CustomerName) function. The cleaned data is then loaded into the DimCustomer table in the data warehouse (InventoryDataWarehouse) for analysis.
+The ETL process consists of **four main pipelines**, each responsible for different aspects of data movement and transformation from `InventoryDB` to `InventoryDataWarehouse`.
 
-2. Product Data Pipeline
-The Product_Data_Pipeline is simpler and consists of a single extraction process:
+---
 
-Step 1: Extraction
-Data from the Products table in the operational database (InventoryDB) is extracted and loaded into the DimProducts table in the data warehouse. This pipeline does not involve any complex transformations, as it primarily transfers the product data for reporting purposes.
-3. Supplier Data Pipeline
-The Supplier_Data_Pipeline also follows a similar flow as the product data pipeline:
+### 1. **Customer Data Pipeline**
 
-Step 1: Extraction
-Data from the Suppliers table in the operational database is extracted and transferred into the DimSuppliers table in the data warehouse. Like the product data pipeline, no major transformations occur during this process.
-4. Fact Sales Data Pipeline
-The FactSales_Data_Pipeline is more complex and involves multiple extraction, transformation, and joining steps. It is responsible for building the FactSales table in the data warehouse.
+The `Customer_Data_Pipeline` handles customer data and consists of two main processes:
 
-This pipeline is divided into four key processes:
+- **Step 1: Extraction**  
+  Extracts customer data from the `Customers` table in `InventoryDB` and loads it into a temporary staging table called `StagingCustomers`. The extraction only includes data from the last 24 hours to avoid redundancy.
 
-Step 1: Extraction of Orders
-Data from the Orders table in the operational database is extracted and loaded into the StagingOrders table.
+- **Step 2: Transformation and Loading**  
+  The transformation process trims leading and trailing spaces from `CustomerName` using the `trim(CustomerName)` function. The cleaned data is then loaded into the `DimCustomer` table in `InventoryDataWarehouse` for further analysis.
 
-Step 2: Extraction of Order Line Items
-The OrderLine table data is extracted and placed into the StagingOrderLine table, which contains information about each product in every order.
+---
 
-Step 3: Extraction of Sales Data
-Sales data is extracted from the Sales table and placed in the StagingSales table. This data represents actual sales transactions.
+### 2. **Product Data Pipeline**
 
-Step 4: Building the FactSales Table
-This process involves joining data from seven tables:
+The `Product_Data_Pipeline` is responsible for product data extraction:
 
-StagingOrders is joined with StagingOrderLine on OrderID.
-The result is joined with the DimProducts table on ProductID.
-The joined result is further joined with the DimSuppliers table on SupplierID.
-It is then joined with StagingSales on ProductID.
-The derived column transformation calculates QuantitySold and SaleAmount:
-QuantitySold is derived from the Quantity field in StagingOrderLine.
-SaleAmount is calculated as QuantitySold * Price from the Products table.
-Finally, the table is joined with DimDate based on SaleDate.
-The fully constructed data is then mapped to the FactSales table in the data warehouse.
+- **Step 1: Extraction**  
+  Extracts data from the `Products` table in `InventoryDB` and loads it into the `DimProducts` table in `InventoryDataWarehouse`. This pipeline focuses solely on data extraction and does not include complex transformations.
 
-Dimensional Model
-The dimensional model is composed of the following tables:
+---
 
-DimCustomer – Contains customer details (ID, name, contact information).
-DimProduct – Contains product details (ID, name, supplier, category, price).
-DimSupplier – Contains supplier details (ID, name, contact information).
-DimDate – Contains date information (key, full date, day, month, year, quarter).
-FactSales – Stores sales transaction data with references to customer, product, and supplier dimensions.
-Key Transformations
-Trim Customer Name: The transformation step in the Customer_Data_Pipeline uses the trim() function to clean customer names by removing unwanted spaces.
-Derived Columns in FactSales: The FactSales table uses derived columns to calculate QuantitySold and SaleAmount, ensuring accurate sales records are stored for analysis.
+### 3. **Supplier Data Pipeline**
+
+The `Supplier_Data_Pipeline` follows the same structure as the product data pipeline:
+
+- **Step 1: Extraction**  
+  Extracts supplier data from the `Suppliers` table in `InventoryDB` and loads it into the `DimSuppliers` table in `InventoryDataWarehouse`. Like the product data pipeline, this process focuses on extraction without transformations.
+
+---
+
+### 4. **Fact Sales Data Pipeline**
+
+The `FactSales_Data_Pipeline` is the most complex and involves multiple steps to join data and build the `FactSales` table in `InventoryDataWarehouse`. The pipeline consists of the following steps:
+
+- **Step 1: Extract Orders**  
+  Extracts order data from the `Orders` table and loads it into the `StagingOrders` table.
+
+- **Step 2: Extract Order Line Items**  
+  Extracts line item data from the `OrderLine` table and loads it into the `StagingOrderLine` table.
+
+- **Step 3: Extract Sales Data**  
+  Extracts sales data from the `Sales` table and loads it into the `StagingSales` table.
+
+- **Step 4: Build FactSales Table**  
+  The final step involves joining data from **seven tables**:
+  - `StagingOrders` is joined with `StagingOrderLine` on `OrderID`.
+  - The resulting data is joined with `DimProducts` on `ProductID`.
+  - This data is then joined with `DimSuppliers` on `SupplierID`.
+  - The result is joined with `StagingSales` on `ProductID`.
+  - A derived column transformation calculates:
+    - `QuantitySold` from the `Quantity` field in `StagingOrderLine`.
+    - `SaleAmount` as `QuantitySold * Price` from the `Products` table.
+  - The final join is with `DimDate` based on `SaleDate`.
+  
+  The constructed data is mapped to the `FactSales` table in `InventoryDataWarehouse` for reporting.
+
+---
+
+## Data Warehouse Schema
+
+The data warehouse uses a dimensional model with the following tables:
+
+1. **DimCustomer** – Contains customer details (ID, name, contact information).
+2. **DimProduct** – Contains product details (ID, name, supplier, category, price).
+3. **DimSupplier** – Contains supplier details (ID, name, contact information).
+4. **DimDate** – Contains date information (key, full date, day, month, year, quarter).
+5. **FactSales** – Stores sales transaction data, linked to customer, product, supplier, and date dimensions.
+
+---
+
+## Transformations
+
+Key transformations during the ETL process include:
+
+- **Trim Customer Names**  
+  The `Customer_Data_Pipeline` removes any leading or trailing spaces from `CustomerName` using the `trim()` function.
+
+- **Derived Columns in FactSales**  
+  The `FactSales_Data_Pipeline` uses derived columns to calculate `QuantitySold` and `SaleAmount`. These values are calculated using:
+  - `QuantitySold = Quantity` from the `StagingOrderLine` table.
+  - `SaleAmount = QuantitySold * Price` from the `Products` table.
+
+---
+
+## Technology Stack
+
+- **Azure Data Factory**: The ETL pipelines are implemented using Azure Data Factory.
+- **SQL Server**: The operational database (`InventoryDB`) and data warehouse (`InventoryDataWarehouse`) are hosted on SQL Server.
+- **Azure SQL Database**: Data is stored in the Azure SQL Database for reporting and analysis.
+
+
